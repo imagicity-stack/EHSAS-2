@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-01-21T14:34:54.064298",
-  "total_tests": 10,
-  "passed_tests": 10,
+  "timestamp": "2026-01-21T14:35:28.555085",
+  "total_tests": 16,
+  "passed_tests": 16,
   "success_rate": "100.0%",
   "results": [
     {
@@ -22,12 +22,12 @@
     {
       "test": "Get Alumni Directory",
       "status": "PASSED",
-      "details": "Found 3 approved alumni"
+      "details": "Found 4 approved alumni"
     },
     {
       "test": "Alumni Registration",
       "status": "PASSED",
-      "details": "Alumni registered with ID: b6cab6c6-16b2-4166-b03c-920e44c7ba2f"
+      "details": "Alumni registered with ID: 01fbc17c-11a0-4e06-b2a4-83b74d412af7"
     },
     {
       "test": "Admin Login",
@@ -37,7 +37,7 @@
     {
       "test": "Admin Stats",
       "status": "PASSED",
-      "details": "Stats: 3 alumni, 2 pending"
+      "details": "Stats: 4 alumni, 2 pending"
     },
     {
       "test": "Admin Pending Alumni",
@@ -47,12 +47,42 @@
     {
       "test": "Admin Approve Alumni",
       "status": "PASSED",
-      "details": "Alumni approved with EHSAS ID: EH220002"
+      "details": "Alumni approved with EHSAS ID: EH220003"
     },
     {
       "test": "Admin Notifications",
       "status": "PASSED",
-      "details": "Found 5 notifications"
+      "details": "Found 6 notifications"
+    },
+    {
+      "test": "Create Spotlight Alumni",
+      "status": "PASSED",
+      "details": "Created spotlight with ID: ac3bfb6c-a6f4-40d7-baf1-bd515a739915"
+    },
+    {
+      "test": "Update Spotlight Alumni",
+      "status": "PASSED",
+      "details": "Spotlight updated successfully"
+    },
+    {
+      "test": "Delete Spotlight Alumni",
+      "status": "PASSED",
+      "details": "Spotlight deleted successfully"
+    },
+    {
+      "test": "Create Event",
+      "status": "PASSED",
+      "details": "Created event with ID: aee48fd5-3158-4893-93ce-a91101fbed5c"
+    },
+    {
+      "test": "Update Event",
+      "status": "PASSED",
+      "details": "Event updated successfully"
+    },
+    {
+      "test": "Delete Event",
+      "status": "PASSED",
+      "details": "Event deleted successfully"
     }
   ]
 }
