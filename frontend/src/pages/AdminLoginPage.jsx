@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowLeft, Shield } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_elden-alumni/artifacts/0ansi0ti_LOGO-2.png";
 
 const AdminLoginPage = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const AdminLoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0D1B2A] flex items-center justify-center p-4" data-testid="admin-login-page">
+    <div className="min-h-screen bg-[#6B0F2A] flex items-center justify-center p-4" data-testid="admin-login-page">
       <div className="w-full max-w-md">
         {/* Back Link */}
         <Link
@@ -56,11 +57,9 @@ const AdminLoginPage = () => {
         {/* Login Card */}
         <div className="bg-white rounded-none p-10 shadow-2xl">
           <div className="text-center mb-10">
-            <div className="w-16 h-16 border border-[#0D1B2A] flex items-center justify-center mx-auto mb-6">
-              <Shield className="w-7 h-7 text-[#0D1B2A]" />
-            </div>
-            <h1 className="font-heading text-2xl font-bold text-[#0D1B2A]">Admin Portal</h1>
-            <p className="text-[#778DA9] text-sm mt-2">
+            <img src={LOGO_URL} alt="EHSAS" className="h-20 w-auto mx-auto mb-6" />
+            <h1 className="font-heading text-2xl font-bold text-[#2D2D2D]">Admin Portal</h1>
+            <p className="text-[#4A4A4A] text-sm mt-2">
               EHSAS Administration Access
             </p>
           </div>
@@ -97,14 +96,14 @@ const AdminLoginPage = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#0D1B2A] text-white hover:bg-[#1B263B] rounded-none py-6 text-sm tracking-wider font-medium"
+              className="w-full bg-[#8B1C3A] text-white hover:bg-[#6B0F2A] rounded-none py-6 text-sm tracking-wider font-medium"
               data-testid="admin-login-btn"
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
-          <p className="text-center text-[#778DA9] text-xs mt-8">
+          <p className="text-center text-[#4A4A4A] text-xs mt-8">
             Access restricted to authorized personnel only.
           </p>
         </div>
