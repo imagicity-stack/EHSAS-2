@@ -5,16 +5,17 @@
 @tailwind utilities;
 
 :root {
-    --navy: #0D1B2A;
-    --navy-light: #1B263B;
-    --navy-medium: #415A77;
-    --slate: #778DA9;
-    --silver: #E0E1DD;
-    --cream: #FAFAF8;
-    --white: #FFFFFF;
+    --cardinal: #8B1C3A;
+    --cardinal-dark: #6B0F2A;
+    --cardinal-light: #A52A4A;
+    --cream: #F5F0E6;
+    --cream-light: #FAF8F3;
+    --cream-dark: #E8E0D0;
+    --gold: #C9A227;
+    --gold-light: #D4B84A;
     --charcoal: #2D2D2D;
-    --cardinal: #6B0F1A;
-    --cardinal-light: #8B1E2F;
+    --charcoal-light: #4A4A4A;
+    --white: #FFFFFF;
 }
 
 body {
@@ -22,8 +23,8 @@ body {
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--cream);
-    color: var(--navy);
+    background-color: var(--cream-light);
+    color: var(--charcoal);
 }
 
 /* Heritage Typography */
@@ -60,14 +61,14 @@ body {
 /* Premium card styling */
 .heritage-card {
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.08);
-    box-shadow: 0 4px 24px -4px rgba(13, 27, 42, 0.06);
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    box-shadow: 0 4px 24px -4px rgba(139, 28, 58, 0.06);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .heritage-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px -12px rgba(13, 27, 42, 0.12);
+    box-shadow: 0 20px 40px -12px rgba(139, 28, 58, 0.12);
 }
 
 /* Custom scrollbar */
@@ -80,12 +81,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--navy);
+    background: var(--cardinal);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--navy-light);
+    background: var(--cardinal-dark);
 }
 
 /* Animations */
@@ -111,32 +112,32 @@ body {
 
 /* Premium glass header */
 .glass-header {
-    background: rgba(250, 250, 248, 0.92);
+    background: rgba(250, 248, 243, 0.95);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
 }
 
 /* Button styles - Premium */
 .btn-primary {
-    background-color: var(--navy);
+    background-color: var(--cardinal);
     color: white;
     padding: 0.875rem 2.5rem;
     font-weight: 500;
     letter-spacing: 0.03em;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px -4px rgba(13, 27, 42, 0.3);
+    box-shadow: 0 4px 20px -4px rgba(139, 28, 58, 0.3);
 }
 
 .btn-primary:hover {
-    background-color: var(--navy-light);
-    box-shadow: 0 8px 30px -4px rgba(13, 27, 42, 0.4);
+    background-color: var(--cardinal-dark);
+    box-shadow: 0 8px 30px -4px rgba(139, 28, 58, 0.4);
     transform: translateY(-2px);
 }
 
 .btn-secondary {
     background-color: transparent;
-    border: 1.5px solid var(--navy);
-    color: var(--navy);
+    border: 1.5px solid var(--cardinal);
+    color: var(--cardinal);
     padding: 0.875rem 2.5rem;
     font-weight: 500;
     letter-spacing: 0.03em;
@@ -144,57 +145,57 @@ body {
 }
 
 .btn-secondary:hover {
-    background-color: var(--navy);
-    color: white;
-}
-
-.btn-cardinal {
     background-color: var(--cardinal);
     color: white;
-    padding: 0.875rem 2.5rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px -4px rgba(107, 15, 26, 0.35);
 }
 
-.btn-cardinal:hover {
-    background-color: var(--cardinal-light);
-    box-shadow: 0 8px 30px -4px rgba(107, 15, 26, 0.45);
+.btn-gold {
+    background-color: var(--gold);
+    color: var(--charcoal);
+    padding: 0.875rem 2.5rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px -4px rgba(201, 162, 39, 0.35);
+}
+
+.btn-gold:hover {
+    background-color: var(--gold-light);
+    box-shadow: 0 8px 30px -4px rgba(201, 162, 39, 0.45);
     transform: translateY(-2px);
 }
 
 /* Form inputs - Premium */
 .input-heritage {
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.15);
+    border: 1px solid rgba(139, 28, 58, 0.15);
     padding: 0.875rem 1rem;
     transition: all 0.3s ease;
 }
 
 .input-heritage:focus {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 4px rgba(13, 27, 42, 0.08);
+    border-color: var(--cardinal);
+    box-shadow: 0 0 0 4px rgba(139, 28, 58, 0.08);
     outline: none;
 }
 
 /* Section divider - Elegant */
 .section-divider {
     width: 50px;
-    height: 2px;
-    background: var(--navy);
+    height: 3px;
+    background: var(--cardinal);
     margin: 1.5rem 0;
 }
 
 /* Link style */
 a {
-    color: var(--navy);
+    color: var(--cardinal);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 a:hover {
-    color: var(--cardinal);
+    color: var(--cardinal-dark);
 }
 
 code {
@@ -203,30 +204,30 @@ code {
 
 @layer base {
     :root {
-        --background: 60 10% 98%;
-        --foreground: 210 50% 10%;
+        --background: 40 30% 96%;
+        --foreground: 0 0% 18%;
         --card: 0 0% 100%;
-        --card-foreground: 210 50% 10%;
+        --card-foreground: 0 0% 18%;
         --popover: 0 0% 100%;
-        --popover-foreground: 210 50% 10%;
-        --primary: 210 50% 10%;
+        --popover-foreground: 0 0% 18%;
+        --primary: 345 65% 33%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 210 20% 96%;
-        --secondary-foreground: 210 50% 10%;
-        --muted: 210 15% 94%;
-        --muted-foreground: 210 20% 40%;
-        --accent: 350 78% 24%;
-        --accent-foreground: 0 0% 100%;
+        --secondary: 40 30% 90%;
+        --secondary-foreground: 0 0% 18%;
+        --muted: 40 20% 92%;
+        --muted-foreground: 0 0% 40%;
+        --accent: 45 71% 47%;
+        --accent-foreground: 0 0% 18%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 210 20% 88%;
-        --input: 210 20% 88%;
-        --ring: 210 50% 10%;
-        --chart-1: 210 50% 10%;
-        --chart-2: 210 30% 50%;
-        --chart-3: 350 78% 24%;
-        --chart-4: 210 20% 80%;
-        --chart-5: 210 40% 30%;
+        --border: 345 20% 85%;
+        --input: 345 20% 85%;
+        --ring: 345 65% 33%;
+        --chart-1: 345 65% 33%;
+        --chart-2: 45 71% 47%;
+        --chart-3: 0 0% 30%;
+        --chart-4: 40 30% 80%;
+        --chart-5: 345 40% 50%;
         --radius: 0.25rem;
     }
 }

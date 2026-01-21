@@ -1,5 +1,5 @@
 /* EHSAS - Elden Heights School Alumni Society */
-/* Premium Elite Design */
+/* Premium Design - Cardinal, Cream, Gold */
 
 /* Hero Section */
 .hero-section {
@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(13, 27, 42, 0.82), rgba(13, 27, 42, 0.92));
+    background: linear-gradient(to bottom, rgba(107, 15, 42, 0.85), rgba(45, 45, 45, 0.9));
     z-index: 1;
 }
 
@@ -31,7 +31,7 @@
 /* Navigation - Premium */
 .nav-link {
     position: relative;
-    color: var(--navy);
+    color: var(--charcoal);
     font-weight: 500;
     padding: 0.5rem 0;
     letter-spacing: 0.02em;
@@ -43,8 +43,8 @@
     bottom: 0;
     left: 0;
     width: 0;
-    height: 1.5px;
-    background: var(--navy);
+    height: 2px;
+    background: var(--cardinal);
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -57,7 +57,7 @@
     position: relative;
     overflow: hidden;
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.06);
+    border: 1px solid rgba(139, 28, 58, 0.08);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -68,7 +68,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: var(--navy);
+    background: var(--cardinal);
     transform: scaleX(0);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -79,19 +79,19 @@
 
 .spotlight-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 25px 50px -15px rgba(13, 27, 42, 0.15);
+    box-shadow: 0 25px 50px -15px rgba(139, 28, 58, 0.15);
 }
 
 /* Event Cards - Premium */
 .event-card {
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.06);
+    border: 1px solid rgba(139, 28, 58, 0.08);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .event-card:hover {
-    box-shadow: 0 20px 40px -12px rgba(13, 27, 42, 0.12);
+    box-shadow: 0 20px 40px -12px rgba(139, 28, 58, 0.12);
 }
 
 .event-card-image {
@@ -110,21 +110,21 @@
 /* Alumni Directory Cards - Premium */
 .alumni-card {
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.06);
-    border-left: 3px solid var(--navy);
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    border-left: 3px solid var(--cardinal);
     padding: 1.5rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .alumni-card:hover {
-    border-left-color: var(--cardinal);
-    box-shadow: 0 15px 35px -10px rgba(13, 27, 42, 0.1);
+    border-left-color: var(--gold);
+    box-shadow: 0 15px 35px -10px rgba(139, 28, 58, 0.1);
     transform: translateY(-2px);
 }
 
 /* Badge styles - Elegant */
-.badge-navy {
-    background: var(--navy);
+.badge-cardinal {
+    background: var(--cardinal);
     color: white;
     padding: 0.25rem 0.875rem;
     font-size: 0.7rem;
@@ -133,27 +133,18 @@
     text-transform: uppercase;
 }
 
-.badge-slate {
-    background: var(--slate);
-    color: white;
+.badge-gold {
+    background: var(--gold);
+    color: var(--charcoal);
     padding: 0.25rem 0.875rem;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.08em;
 }
 
-.badge-cardinal {
-    background: var(--cardinal);
-    color: white;
-    padding: 0.25rem 0.875rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-}
-
-.badge-silver {
-    background: var(--silver);
-    color: var(--navy);
+.badge-cream {
+    background: var(--cream);
+    color: var(--cardinal);
     padding: 0.25rem 0.875rem;
     font-size: 0.7rem;
     font-weight: 600;
@@ -162,12 +153,12 @@
 
 /* Footer - Premium */
 .footer-section {
-    background: var(--navy);
+    background: var(--cardinal-dark);
     color: white;
 }
 
 .footer-heading {
-    color: var(--silver);
+    color: var(--gold);
     font-family: 'Playfair Display', serif;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -175,23 +166,23 @@
 }
 
 .footer-link {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7);
     transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-    color: white;
+    color: var(--gold);
 }
 
 /* Form styles - Premium */
 .form-section {
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.08);
-    box-shadow: 0 8px 30px -8px rgba(13, 27, 42, 0.08);
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    box-shadow: 0 8px 30px -8px rgba(139, 28, 58, 0.08);
 }
 
 .form-label {
-    color: var(--navy);
+    color: var(--charcoal);
     font-weight: 500;
     margin-bottom: 0.5rem;
     font-size: 0.875rem;
@@ -200,12 +191,12 @@
 
 /* Admin Panel - Premium */
 .admin-sidebar {
-    background: var(--navy);
+    background: var(--cardinal-dark);
     min-height: 100vh;
 }
 
 .admin-nav-item {
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.7);
     padding: 0.875rem 1.5rem;
     display: flex;
     align-items: center;
@@ -217,33 +208,33 @@
 
 .admin-nav-item:hover,
 .admin-nav-item.active {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border-left-color: var(--silver);
+    border-left-color: var(--gold);
 }
 
 /* Stats Cards - Premium */
 .stat-card {
     background: white;
-    border: 1px solid rgba(13, 27, 42, 0.06);
+    border: 1px solid rgba(139, 28, 58, 0.08);
     padding: 1.75rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-card:hover {
-    box-shadow: 0 15px 35px -10px rgba(13, 27, 42, 0.1);
+    box-shadow: 0 15px 35px -10px rgba(139, 28, 58, 0.1);
 }
 
 .stat-number {
     font-family: 'Playfair Display', serif;
     font-size: 2.75rem;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--cardinal);
     line-height: 1;
 }
 
 .stat-label {
-    color: var(--slate);
+    color: var(--charcoal-light);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -264,29 +255,14 @@
 
 /* Selection color */
 ::selection {
-    background: var(--navy);
+    background: var(--cardinal);
     color: white;
 }
 
 /* Focus states - Elegant */
 *:focus-visible {
-    outline: 2px solid var(--navy);
+    outline: 2px solid var(--cardinal);
     outline-offset: 3px;
-}
-
-/* Premium line decoration */
-.line-decoration {
-    position: relative;
-}
-
-.line-decoration::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -60px;
-    width: 40px;
-    height: 1px;
-    background: var(--navy);
 }
 
 /* Elegant hover underline */
