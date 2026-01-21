@@ -112,13 +112,13 @@ const LandingPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animate-delay-300">
             <Link to="/register" data-testid="hero-join-btn">
-              <Button className="btn-gold rounded-sm text-base px-8 py-6">
+              <Button className="bg-[#C9A227] hover:bg-[#E3C565] text-[#1A2A4A] font-semibold rounded-sm text-base px-8 py-6 shadow-lg">
                 Join EHSAS
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
             <Link to="/directory" data-testid="hero-explore-btn">
-              <Button className="btn-secondary border-white text-white hover:bg-white hover:text-[#1A2A4A] rounded-sm text-base px-8 py-6">
+              <Button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#1A2A4A] rounded-sm text-base px-8 py-6">
                 Explore Alumni Network
               </Button>
             </Link>
