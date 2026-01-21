@@ -453,10 +453,14 @@ async def approve_alumni(alumni_id: str, admin: dict = Depends(get_current_admin
         }}
     )
     
-    # Mock: Send approval email with EHSAS ID
-    logger.info(f"[MOCK EMAIL] To: {alumni['email']} - Your EHSAS membership approved! ID: {ehsas_id}")
+    # Send approval email with EHSAS ID
+    email_sent = send_approval_email(alumni, ehsas_id)
     
-    return {"message": f"Alumni approved with EHSAS ID: {ehsas_id}", "ehsas_id": ehsas_id}
+    return {
+        "message": f"Alumni approved with EHSAS ID: {ehsas_id}", 
+        "ehsas_id": ehsas_id,
+        "email_sent": email_sent
+    }
 
 @api_router.put("/alumni/{alumni_id}/reject")
 async def reject_alumni(alumni_id: str, admin: dict = Depends(get_current_admin)):
@@ -469,8 +473,8 @@ async def reject_alumni(alumni_id: str, admin: dict = Depends(get_current_admin)
         {"$set": {"status": "rejected"}}
     )
     
-    # Mock: Send rejection email
-    logger.info(f"[MOCK EMAIL] To: {alumni['email']} - Your EHSAS registration was not approved")
+    # Send rejection email
+    send_rejection_email(alumni)
     
     return {"message": "Alumni registration rejected"}
 
