@@ -371,8 +371,8 @@ async def register_alumni(data: AlumniRegistration):
     notif_doc['created_at'] = notif_doc['created_at'].isoformat()
     await db.notifications.insert_one(notif_doc)
     
-    # Mock: Send email to ehsas@eldenheights.org
-    logger.info(f"[MOCK EMAIL] To: ehsas@eldenheights.org - New registration from {data.email}")
+    # Send email notification to admin
+    send_registration_notification(doc)
     
     return {"message": "Registration submitted successfully. You will receive confirmation once approved.", "id": alumni.id}
 
