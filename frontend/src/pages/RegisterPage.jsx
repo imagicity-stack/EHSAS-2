@@ -78,23 +78,23 @@ const RegisterPage = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-[#F9F7F1]" data-testid="register-success">
+      <div className="min-h-screen bg-[#FAFAF8]" data-testid="register-success">
         <Navbar />
-        <div className="pt-32 pb-24">
+        <div className="pt-36 pb-28">
           <div className="max-w-xl mx-auto px-4 text-center">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 border border-green-600 flex items-center justify-center mx-auto mb-8">
               <CheckCircle className="w-10 h-10 text-green-600" />
             </div>
-            <h1 className="font-heading text-3xl md:text-4xl font-bold text-[#1A2A4A] mb-4">
-              Registration Submitted!
+            <h1 className="font-heading text-3xl md:text-4xl font-bold text-[#0D1B2A] mb-4">
+              Registration Submitted
             </h1>
-            <p className="text-[#475569] text-lg mb-8">
+            <p className="text-[#415A77] text-lg mb-10 leading-relaxed">
               Thank you for registering with EHSAS. Your application has been received and is pending verification.
               Once approved, you will receive your official EHSAS ID via email.
             </p>
             <Button
               onClick={() => navigate("/")}
-              className="btn-primary rounded-sm"
+              className="bg-[#0D1B2A] text-white hover:bg-[#1B263B] rounded-none px-8 py-5"
               data-testid="back-home-btn"
             >
               <ArrowLeft className="mr-2 w-4 h-4" />
@@ -108,31 +108,31 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F9F7F1]" data-testid="register-page">
+    <div className="min-h-screen bg-[#FAFAF8]" data-testid="register-page">
       <Navbar />
 
-      <div className="pt-28 pb-24">
+      <div className="pt-32 pb-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-12">
-            <span className="text-[#C9A227] font-medium tracking-widest uppercase text-sm">
+          <div className="text-center mb-16">
+            <span className="text-[#778DA9] font-medium tracking-[0.2em] uppercase text-xs">
               Join the Community
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#1A2A4A] mt-4 mb-4">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1B2A] mt-4 mb-4">
               Alumni Registration
             </h1>
             <div className="section-divider mx-auto"></div>
-            <p className="text-[#475569] text-lg max-w-2xl mx-auto mt-4">
+            <p className="text-[#415A77] text-lg max-w-2xl mx-auto mt-6">
               Join the official EHSAS alumni network. Your registration will be verified 
               before you receive your official EHSAS membership ID.
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="form-section rounded-sm p-8 md:p-12">
+          <form onSubmit={handleSubmit} className="form-section rounded-none p-10 md:p-14">
             {/* Student's Profile */}
-            <div className="mb-10">
-              <h2 className="font-heading text-2xl font-semibold text-[#1A2A4A] mb-6 pb-2 border-b border-[#1A2A4A]/10">
+            <div className="mb-12">
+              <h2 className="font-heading text-2xl font-semibold text-[#0D1B2A] mb-8 pb-3 border-b border-[#0D1B2A]/10">
                 Student's Profile
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
@@ -144,7 +144,7 @@ const RegisterPage = () => {
                     value={formData.first_name}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-first-name"
                   />
                 </div>
@@ -156,7 +156,7 @@ const RegisterPage = () => {
                     value={formData.last_name}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-last-name"
                   />
                 </div>
@@ -169,7 +169,7 @@ const RegisterPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-email"
                   />
                 </div>
@@ -181,7 +181,7 @@ const RegisterPage = () => {
                     value={formData.mobile}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-mobile"
                   />
                 </div>
@@ -191,7 +191,7 @@ const RegisterPage = () => {
                     value={formData.year_of_joining}
                     onValueChange={(val) => handleSelectChange("year_of_joining", val)}
                   >
-                    <SelectTrigger className="input-heritage rounded-sm" data-testid="select-year-joining">
+                    <SelectTrigger className="input-heritage rounded-none h-12" data-testid="select-year-joining">
                       <SelectValue placeholder="Select year" />
                     </SelectTrigger>
                     <SelectContent>
@@ -209,7 +209,7 @@ const RegisterPage = () => {
                     value={formData.year_of_leaving}
                     onValueChange={(val) => handleSelectChange("year_of_leaving", val)}
                   >
-                    <SelectTrigger className="input-heritage rounded-sm" data-testid="select-year-leaving">
+                    <SelectTrigger className="input-heritage rounded-none h-12" data-testid="select-year-leaving">
                       <SelectValue placeholder="Select year" />
                     </SelectTrigger>
                     <SelectContent>
@@ -227,7 +227,7 @@ const RegisterPage = () => {
                     value={formData.class_of_joining}
                     onValueChange={(val) => handleSelectChange("class_of_joining", val)}
                   >
-                    <SelectTrigger className="input-heritage rounded-sm" data-testid="select-class-joining">
+                    <SelectTrigger className="input-heritage rounded-none h-12" data-testid="select-class-joining">
                       <SelectValue placeholder="Select class" />
                     </SelectTrigger>
                     <SelectContent>
@@ -245,7 +245,7 @@ const RegisterPage = () => {
                     value={formData.last_class_studied}
                     onValueChange={(val) => handleSelectChange("last_class_studied", val)}
                   >
-                    <SelectTrigger className="input-heritage rounded-sm" data-testid="select-last-class">
+                    <SelectTrigger className="input-heritage rounded-none h-12" data-testid="select-last-class">
                       <SelectValue placeholder="Select class" />
                     </SelectTrigger>
                     <SelectContent>
@@ -263,7 +263,7 @@ const RegisterPage = () => {
                     value={formData.last_house}
                     onValueChange={(val) => handleSelectChange("last_house", val)}
                   >
-                    <SelectTrigger className="input-heritage rounded-sm" data-testid="select-house">
+                    <SelectTrigger className="input-heritage rounded-none h-12" data-testid="select-house">
                       <SelectValue placeholder="Select house" />
                     </SelectTrigger>
                     <SelectContent>
@@ -282,7 +282,7 @@ const RegisterPage = () => {
                     name="profession"
                     value={formData.profession}
                     onChange={handleChange}
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     placeholder="e.g., Software Engineer"
                     data-testid="input-profession"
                   />
@@ -294,7 +294,7 @@ const RegisterPage = () => {
                     name="organization"
                     value={formData.organization}
                     onChange={handleChange}
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     placeholder="e.g., Google India"
                     data-testid="input-organization"
                   />
@@ -303,8 +303,8 @@ const RegisterPage = () => {
             </div>
 
             {/* Address */}
-            <div className="mb-10">
-              <h2 className="font-heading text-2xl font-semibold text-[#1A2A4A] mb-6 pb-2 border-b border-[#1A2A4A]/10">
+            <div className="mb-12">
+              <h2 className="font-heading text-2xl font-semibold text-[#0D1B2A] mb-8 pb-3 border-b border-[#0D1B2A]/10">
                 Address
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
@@ -316,7 +316,7 @@ const RegisterPage = () => {
                     value={formData.full_address}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-address"
                   />
                 </div>
@@ -328,7 +328,7 @@ const RegisterPage = () => {
                     value={formData.city}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-city"
                   />
                 </div>
@@ -340,7 +340,7 @@ const RegisterPage = () => {
                     value={formData.pincode}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-pincode"
                   />
                 </div>
@@ -352,7 +352,7 @@ const RegisterPage = () => {
                     value={formData.state}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-state"
                   />
                 </div>
@@ -364,7 +364,7 @@ const RegisterPage = () => {
                     value={formData.country}
                     onChange={handleChange}
                     required
-                    className="input-heritage rounded-sm"
+                    className="input-heritage rounded-none h-12"
                     data-testid="input-country"
                   />
                 </div>
@@ -372,16 +372,16 @@ const RegisterPage = () => {
             </div>
 
             {/* Submit */}
-            <div className="text-center pt-6">
+            <div className="text-center pt-8">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-primary rounded-sm px-12 py-6 text-base"
+                className="bg-[#0D1B2A] text-white hover:bg-[#1B263B] rounded-none px-14 py-6 text-sm tracking-wider font-medium shadow-xl"
                 data-testid="submit-registration-btn"
               >
                 {isSubmitting ? "Submitting..." : "Submit Registration"}
               </Button>
-              <p className="text-[#475569] text-sm mt-4">
+              <p className="text-[#778DA9] text-sm mt-6">
                 By registering, you agree to be part of the official EHSAS alumni network.
               </p>
             </div>

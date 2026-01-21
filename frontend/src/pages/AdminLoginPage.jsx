@@ -41,12 +41,12 @@ const AdminLoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1A2A4A] flex items-center justify-center p-4" data-testid="admin-login-page">
+    <div className="min-h-screen bg-[#0D1B2A] flex items-center justify-center p-4" data-testid="admin-login-page">
       <div className="w-full max-w-md">
         {/* Back Link */}
         <Link
           to="/"
-          className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center text-white/50 hover:text-white mb-10 transition-colors text-sm"
           data-testid="back-home-link"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -54,13 +54,13 @@ const AdminLoginPage = () => {
         </Link>
 
         {/* Login Card */}
-        <div className="bg-white rounded-sm p-8 shadow-2xl">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-[#1A2A4A] rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-[#C9A227]" />
+        <div className="bg-white rounded-none p-10 shadow-2xl">
+          <div className="text-center mb-10">
+            <div className="w-16 h-16 border border-[#0D1B2A] flex items-center justify-center mx-auto mb-6">
+              <Shield className="w-7 h-7 text-[#0D1B2A]" />
             </div>
-            <h1 className="font-heading text-2xl font-bold text-[#1A2A4A]">Admin Portal</h1>
-            <p className="text-[#475569] text-sm mt-2">
+            <h1 className="font-heading text-2xl font-bold text-[#0D1B2A]">Admin Portal</h1>
+            <p className="text-[#778DA9] text-sm mt-2">
               EHSAS Administration Access
             </p>
           </div>
@@ -75,7 +75,7 @@ const AdminLoginPage = () => {
                 value={credentials.email}
                 onChange={handleChange}
                 required
-                className="input-heritage rounded-sm"
+                className="input-heritage rounded-none h-12"
                 placeholder="admin@example.com"
                 data-testid="admin-email-input"
               />
@@ -89,7 +89,7 @@ const AdminLoginPage = () => {
                 value={credentials.password}
                 onChange={handleChange}
                 required
-                className="input-heritage rounded-sm"
+                className="input-heritage rounded-none h-12"
                 placeholder="••••••••"
                 data-testid="admin-password-input"
               />
@@ -97,21 +97,21 @@ const AdminLoginPage = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full btn-primary rounded-sm py-6"
+              className="w-full bg-[#0D1B2A] text-white hover:bg-[#1B263B] rounded-none py-6 text-sm tracking-wider font-medium"
               data-testid="admin-login-btn"
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
-          <p className="text-center text-[#475569] text-xs mt-6">
+          <p className="text-center text-[#778DA9] text-xs mt-8">
             Access restricted to authorized personnel only.
           </p>
         </div>
 
         {/* Footer */}
-        <p className="text-center text-white/50 text-sm mt-8">
-          © {new Date().getFullYear()} EHSAS - Elden Heights School Alumni Society
+        <p className="text-center text-white/30 text-sm mt-10">
+          © {new Date().getFullYear()} EHSAS — Elden Heights School Alumni Society
         </p>
       </div>
     </div>
