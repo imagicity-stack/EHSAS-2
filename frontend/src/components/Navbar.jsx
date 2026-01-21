@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_elden-alumni/artifacts/0ansi0ti_LOGO-2.png";
+
 export const Navbar = ({ transparent = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -35,7 +37,7 @@ export const Navbar = ({ transparent = false }) => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        transparent ? "bg-transparent" : "glass-header border-b border-[#0D1B2A]/5"
+        transparent ? "bg-transparent" : "glass-header border-b border-[#8B1C3A]/10"
       }`}
       data-testid="main-navbar"
     >
@@ -43,14 +45,11 @@ export const Navbar = ({ transparent = false }) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" data-testid="navbar-logo">
-            <div className="flex flex-col">
-              <span className={`font-heading text-2xl font-bold tracking-tight ${transparent ? "text-white" : "text-[#0D1B2A]"}`}>
-                EHSAS
-              </span>
-              <span className={`text-[10px] font-medium tracking-[0.2em] uppercase ${transparent ? "text-white/70" : "text-[#778DA9]"}`}>
-                Alumni Society
-              </span>
-            </div>
+            <img 
+              src={LOGO_URL} 
+              alt="EHSAS Logo" 
+              className="h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -61,7 +60,7 @@ export const Navbar = ({ transparent = false }) => {
                 to={link.path}
                 onClick={(e) => scrollToSection(e, link.path)}
                 className={`text-sm font-medium tracking-wide transition-colors duration-300 ${
-                  transparent ? "text-white/90 hover:text-white" : "text-[#0D1B2A] hover:text-[#6B0F1A]"
+                  transparent ? "text-white/90 hover:text-white" : "text-[#2D2D2D] hover:text-[#8B1C3A]"
                 }`}
                 data-testid={`nav-link-${link.name.toLowerCase().replace(" ", "-")}`}
               >
@@ -75,8 +74,8 @@ export const Navbar = ({ transparent = false }) => {
             <Link to="/register" data-testid="nav-join-btn">
               <Button className={`rounded-none text-sm tracking-wider px-8 py-5 font-medium transition-all duration-300 ${
                 transparent 
-                  ? "bg-white text-[#0D1B2A] hover:bg-white/90" 
-                  : "bg-[#0D1B2A] text-white hover:bg-[#1B263B]"
+                  ? "bg-[#C9A227] text-[#2D2D2D] hover:bg-[#D4B84A]" 
+                  : "bg-[#8B1C3A] text-white hover:bg-[#6B0F2A]"
               }`}>
                 Join EHSAS
               </Button>
@@ -90,29 +89,29 @@ export const Navbar = ({ transparent = false }) => {
             data-testid="mobile-menu-btn"
           >
             {isOpen ? (
-              <X className={transparent ? "text-white" : "text-[#0D1B2A]"} size={24} />
+              <X className={transparent ? "text-white" : "text-[#2D2D2D]"} size={24} />
             ) : (
-              <Menu className={transparent ? "text-white" : "text-[#0D1B2A]"} size={24} />
+              <Menu className={transparent ? "text-white" : "text-[#2D2D2D]"} size={24} />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden bg-white border-t border-[#0D1B2A]/5 py-4" data-testid="mobile-menu">
+          <div className="md:hidden bg-white border-t border-[#8B1C3A]/10 py-4" data-testid="mobile-menu">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={(e) => scrollToSection(e, link.path)}
-                className="block px-4 py-3 text-[#0D1B2A] font-medium hover:bg-[#FAFAF8]"
+                className="block px-4 py-3 text-[#2D2D2D] font-medium hover:bg-[#F5F0E6]"
               >
                 {link.name}
               </Link>
             ))}
             <div className="px-4 pt-4">
               <Link to="/register" onClick={() => setIsOpen(false)}>
-                <Button className="bg-[#0D1B2A] text-white hover:bg-[#1B263B] rounded-none w-full">
+                <Button className="bg-[#8B1C3A] text-white hover:bg-[#6B0F2A] rounded-none w-full">
                   Join EHSAS
                 </Button>
               </Link>

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_elden-alumni/artifacts/0ansi0ti_LOGO-2.png";
+
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -11,10 +13,11 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <h3 className="font-heading text-3xl font-bold text-white mb-2">EHSAS</h3>
-            <p className="font-accent italic text-[#E0E1DD] text-lg mb-6">
-              Elden Heights School Alumni Society
-            </p>
+            <img 
+              src={LOGO_URL} 
+              alt="EHSAS Logo" 
+              className="h-20 w-auto mb-6 brightness-0 invert"
+            />
             <p className="text-white/60 text-sm leading-relaxed">
               A lifelong community of Eldenites across the world. EHSAS means "feeling" in Hindi — 
               because this platform is built on belonging, memories, and lifelong connection.
@@ -48,21 +51,21 @@ export const Footer = () => {
             <h4 className="footer-heading text-base">Contact Us</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Mail size={16} className="text-[#E0E1DD] mt-1" />
+                <Mail size={16} className="text-[#C9A227] mt-1" />
                 <div>
-                  <p className="text-white/60 text-sm">ehsas@eldenheights.org</p>
+                  <p className="text-white/70 text-sm">ehsas@eldenheights.org</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <Phone size={16} className="text-[#E0E1DD] mt-1" />
+                <Phone size={16} className="text-[#C9A227] mt-1" />
                 <div>
-                  <p className="text-white/60 text-sm">+91 98765 43210</p>
+                  <p className="text-white/70 text-sm">+91 98765 43210</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin size={16} className="text-[#E0E1DD] mt-1" />
+                <MapPin size={16} className="text-[#C9A227] mt-1" />
                 <div>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-white/70 text-sm">
                     The Elden Heights School<br />
                     123 Heritage Lane<br />
                     New Delhi, India
@@ -80,7 +83,7 @@ export const Footer = () => {
             </p>
             <Link
               to="/admin/login"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 text-white/80 text-sm font-medium hover:bg-white/5 hover:border-white/30 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#C9A227]/50 text-[#C9A227] text-sm font-medium hover:bg-[#C9A227]/10 hover:border-[#C9A227] transition-all duration-300"
               data-testid="footer-admin-login"
             >
               Admin Portal
