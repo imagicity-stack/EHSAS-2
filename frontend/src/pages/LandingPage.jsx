@@ -60,17 +60,17 @@ const LandingPage = () => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case "doctor":
-        return <Heart className="w-4 h-4" />;
+        return <Heart className="w-3.5 h-3.5" />;
       case "founder":
-        return <Briefcase className="w-4 h-4" />;
+        return <Briefcase className="w-3.5 h-3.5" />;
       case "civil_servant":
-        return <Award className="w-4 h-4" />;
+        return <Award className="w-3.5 h-3.5" />;
       case "creator":
-        return <BookOpen className="w-4 h-4" />;
+        return <BookOpen className="w-3.5 h-3.5" />;
       case "corporate":
-        return <GraduationCap className="w-4 h-4" />;
+        return <GraduationCap className="w-3.5 h-3.5" />;
       default:
-        return <Users className="w-4 h-4" />;
+        return <Users className="w-3.5 h-3.5" />;
     }
   };
 
@@ -86,7 +86,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F7F1]" data-testid="landing-page">
+    <div className="min-h-screen bg-[#FAFAF8]" data-testid="landing-page">
       <Navbar transparent={!scrolled} />
 
       {/* Hero Section */}
@@ -99,65 +99,75 @@ const LandingPage = () => {
       >
         <div className="hero-overlay"></div>
         <div className="hero-content max-w-4xl mx-auto">
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 animate-fade-in-up">
+          <p className="text-[#E0E1DD] text-sm tracking-[0.3em] uppercase mb-6 animate-fade-in-up">
+            The Elden Heights School
+          </p>
+          <h1 className="font-heading text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 animate-fade-in-up animate-delay-100">
             EHSAS
           </h1>
-          <p className="font-accent italic text-[#C9A227] text-xl md:text-2xl mb-6 animate-fade-in-up animate-delay-100">
+          <p className="font-accent italic text-[#E0E1DD] text-xl md:text-2xl mb-8 animate-fade-in-up animate-delay-200">
             Elden Heights School Alumni Society
           </p>
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-in-up animate-delay-200">
+          <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-12 animate-fade-in-up animate-delay-300 leading-relaxed">
             A lifelong community of Eldenites across the world.
             <br />
-            <span className="text-[#C9A227]">Connect. Contribute. Celebrate the journey.</span>
+            <span className="text-white font-medium">Connect. Contribute. Celebrate the journey.</span>
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animate-delay-300">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animate-delay-400">
             <Link to="/register" data-testid="hero-join-btn">
-              <Button className="bg-[#C9A227] hover:bg-[#E3C565] text-[#1A2A4A] font-semibold rounded-sm text-base px-8 py-6 shadow-lg">
+              <Button className="bg-white text-[#0D1B2A] hover:bg-[#E0E1DD] rounded-none text-sm tracking-wider px-10 py-6 font-medium shadow-2xl">
                 Join EHSAS
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
             <Link to="/directory" data-testid="hero-explore-btn">
-              <Button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#1A2A4A] rounded-sm text-base px-8 py-6">
-                Explore Alumni Network
+              <Button className="bg-transparent border border-white/40 text-white hover:bg-white/10 hover:border-white rounded-none text-sm tracking-wider px-10 py-6 font-medium">
+                Explore Network
               </Button>
             </Link>
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1.5 h-3 bg-white/50 rounded-full mt-2"></div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-white" data-testid="about-section">
+      <section id="about" className="py-28 bg-white" data-testid="about-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
-              <span className="text-[#C9A227] font-medium tracking-widest uppercase text-sm">
-                Our Story
+              <span className="text-[#778DA9] font-medium tracking-[0.2em] uppercase text-xs">
+                Our Legacy
               </span>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#1A2A4A] mt-4 mb-6">
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1B2A] mt-4 mb-6">
                 What is EHSAS?
               </h2>
               <div className="section-divider"></div>
-              <p className="text-[#475569] text-lg leading-relaxed mb-6">
-                <strong className="text-[#1A2A4A]">EHSAS</strong> stands for{" "}
-                <em className="text-[#8B0000]">Elden Heights School Alumni Society</em>.
+              <p className="text-[#415A77] text-lg leading-relaxed mb-6">
+                <strong className="text-[#0D1B2A]">EHSAS</strong> stands for{" "}
+                <em className="text-[#6B0F1A]">Elden Heights School Alumni Society</em>.
               </p>
-              <p className="text-[#475569] text-lg leading-relaxed mb-6">
-                But EHSAS also means <span className="font-accent italic text-xl text-[#C9A227]">"feeling"</span> in Hindi — 
+              <p className="text-[#415A77] text-lg leading-relaxed mb-6">
+                But EHSAS also means <span className="font-accent italic text-2xl text-[#0D1B2A]">"feeling"</span> in Hindi — 
                 a word that captures the essence of what we're building here.
               </p>
-              <p className="text-[#475569] text-lg leading-relaxed">
+              <p className="text-[#415A77] text-lg leading-relaxed">
                 This platform is built on belonging, memories, and lifelong connection. 
                 It's where Eldenites from every generation come together to celebrate their shared journey, 
                 support current students, and strengthen the legacy of The Elden Heights School.
               </p>
             </div>
             <div className="relative">
-              <div className="absolute -top-4 -left-4 w-full h-full border-2 border-[#C9A227] rounded-sm"></div>
+              <div className="absolute -top-6 -left-6 w-full h-full border border-[#0D1B2A]/10"></div>
               <img
                 src="https://images.pexels.com/photos/8730123/pexels-photo-8730123.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Alumni community"
-                className="relative z-10 w-full h-[500px] object-cover rounded-sm"
+                className="relative z-10 w-full h-[520px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>
           </div>
@@ -165,17 +175,17 @@ const LandingPage = () => {
       </section>
 
       {/* Spotlight Section */}
-      <section id="spotlight" className="py-24 bg-[#F9F7F1] paper-texture" data-testid="spotlight-section">
+      <section id="spotlight" className="py-28 bg-[#FAFAF8] paper-texture" data-testid="spotlight-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-[#C9A227] font-medium tracking-widest uppercase text-sm">
-              Pride of EHSAS
+          <div className="text-center mb-20">
+            <span className="text-[#778DA9] font-medium tracking-[0.2em] uppercase text-xs">
+              Distinguished Alumni
             </span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#1A2A4A] mt-4 mb-4">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1B2A] mt-4 mb-4">
               Eldenites Making Us Proud
             </h2>
             <div className="section-divider mx-auto"></div>
-            <p className="text-[#475569] text-lg max-w-2xl mx-auto mt-4">
+            <p className="text-[#415A77] text-lg max-w-2xl mx-auto mt-6">
               Our alumni are making waves across industries — founders, doctors, civil servants, 
               creators, and corporate leaders shaping the future.
             </p>
@@ -185,29 +195,29 @@ const LandingPage = () => {
             {spotlight.map((person, index) => (
               <Card
                 key={person.id}
-                className="spotlight-card border-0 rounded-sm overflow-hidden"
+                className="spotlight-card border-0 rounded-none overflow-hidden"
                 data-testid={`spotlight-card-${index}`}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-72 overflow-hidden">
                   <img
                     src={person.image_url || "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=400"}
                     alt={person.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="badge-gold rounded-sm flex items-center gap-1">
+                    <Badge className="badge-navy rounded-none flex items-center gap-1.5">
                       {getCategoryIcon(person.category)}
                       {getCategoryLabel(person.category)}
                     </Badge>
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <p className="text-[#C9A227] font-medium text-sm mb-1">Batch of {person.batch}</p>
-                  <h3 className="font-heading text-xl font-semibold text-[#1A2A4A] mb-2">
+                  <p className="text-[#778DA9] font-medium text-xs tracking-wider mb-2">BATCH OF {person.batch}</p>
+                  <h3 className="font-heading text-xl font-semibold text-[#0D1B2A] mb-2">
                     {person.name}
                   </h3>
-                  <p className="text-[#475569] text-sm mb-3">{person.profession}</p>
-                  <p className="text-[#1A2A4A] text-sm font-medium">{person.achievement}</p>
+                  <p className="text-[#415A77] text-sm mb-3">{person.profession}</p>
+                  <p className="text-[#0D1B2A] text-sm font-medium">{person.achievement}</p>
                 </CardContent>
               </Card>
             ))}
@@ -216,17 +226,17 @@ const LandingPage = () => {
       </section>
 
       {/* Events Section */}
-      <section id="events" className="py-24 bg-white" data-testid="events-section">
+      <section id="events" className="py-28 bg-white" data-testid="events-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-[#C9A227] font-medium tracking-widest uppercase text-sm">
+          <div className="text-center mb-20">
+            <span className="text-[#778DA9] font-medium tracking-[0.2em] uppercase text-xs">
               Stay Connected
             </span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#1A2A4A] mt-4 mb-4">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1B2A] mt-4 mb-4">
               Events & Reunions
             </h2>
             <div className="section-divider mx-auto"></div>
-            <p className="text-[#475569] text-lg max-w-2xl mx-auto mt-4">
+            <p className="text-[#415A77] text-lg max-w-2xl mx-auto mt-6">
               From campus reunions to virtual webinars, there's always an opportunity 
               to reconnect with your fellow Eldenites.
             </p>
@@ -236,10 +246,10 @@ const LandingPage = () => {
             {events.slice(0, 3).map((event, index) => (
               <Card
                 key={event.id}
-                className="event-card border-0 rounded-sm overflow-hidden"
+                className="event-card border-0 rounded-none overflow-hidden"
                 data-testid={`event-card-${index}`}
               >
-                <div className="event-card-image h-48">
+                <div className="event-card-image h-52">
                   <img
                     src={event.image_url || "https://images.pexels.com/photos/6759183/pexels-photo-6759183.jpeg?w=600"}
                     alt={event.title}
@@ -247,27 +257,27 @@ const LandingPage = () => {
                   />
                 </div>
                 <CardContent className="p-6">
-                  <Badge className="badge-navy rounded-sm mb-3 capitalize">
+                  <Badge className="badge-slate rounded-none mb-4 capitalize">
                     {event.event_type}
                   </Badge>
-                  <h3 className="font-heading text-xl font-semibold text-[#1A2A4A] mb-3">
+                  <h3 className="font-heading text-xl font-semibold text-[#0D1B2A] mb-3">
                     {event.title}
                   </h3>
-                  <p className="text-[#475569] text-sm mb-4 line-clamp-2">
+                  <p className="text-[#415A77] text-sm mb-4 line-clamp-2">
                     {event.description}
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-[#475569]">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4 text-[#C9A227]" />
+                  <div className="flex items-center gap-4 text-sm text-[#778DA9]">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-4 h-4" />
                       {event.date}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4 text-[#C9A227]" />
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-4 h-4" />
                       {event.time}
                     </span>
                   </div>
-                  <div className="flex items-center gap-1 mt-2 text-sm text-[#475569]">
-                    <MapPin className="w-4 h-4 text-[#C9A227]" />
+                  <div className="flex items-center gap-1.5 mt-3 text-sm text-[#778DA9]">
+                    <MapPin className="w-4 h-4" />
                     {event.location}
                   </div>
                 </CardContent>
@@ -278,17 +288,17 @@ const LandingPage = () => {
       </section>
 
       {/* Give Back Section */}
-      <section id="giveback" className="py-24 bg-[#1A2A4A]" data-testid="giveback-section">
+      <section id="giveback" className="py-28 bg-[#0D1B2A]" data-testid="giveback-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-[#C9A227] font-medium tracking-widest uppercase text-sm">
+          <div className="text-center mb-20">
+            <span className="text-[#778DA9] font-medium tracking-[0.2em] uppercase text-xs">
               Make a Difference
             </span>
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mt-4 mb-4">
               Give Back to Your Roots
             </h2>
-            <div className="section-divider mx-auto bg-[#C9A227]"></div>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto mt-4">
+            <div className="section-divider mx-auto bg-[#E0E1DD]"></div>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto mt-6">
               Your success story began at Elden Heights. Now, help write the next chapter 
               for current students and the school community.
             </p>
@@ -297,47 +307,47 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: <Users className="w-8 h-8" />,
-                title: "Mentorship Program",
+                icon: <Users className="w-7 h-7" />,
+                title: "Mentorship",
                 description: "Guide students through career choices and life decisions.",
               },
               {
-                icon: <Briefcase className="w-8 h-8" />,
+                icon: <Briefcase className="w-7 h-7" />,
                 title: "Internships",
                 description: "Offer internship opportunities at your organization.",
               },
               {
-                icon: <GraduationCap className="w-8 h-8" />,
+                icon: <GraduationCap className="w-7 h-7" />,
                 title: "Scholarships",
                 description: "Support deserving students' education journey.",
               },
               {
-                icon: <Heart className="w-8 h-8" />,
+                icon: <Heart className="w-7 h-7" />,
                 title: "Donations",
                 description: "Contribute to school infrastructure and growth.",
               },
             ].map((item, index) => (
               <Card
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-sm p-6 hover:bg-white/10 transition-colors group"
+                className="bg-white/5 border border-white/10 rounded-none p-8 hover:bg-white/8 transition-all duration-500 group"
                 data-testid={`giveback-card-${index}`}
               >
-                <div className="w-16 h-16 bg-[#C9A227]/20 rounded-sm flex items-center justify-center text-[#C9A227] mb-4 group-hover:bg-[#C9A227] group-hover:text-[#1A2A4A] transition-colors">
+                <div className="w-14 h-14 border border-[#E0E1DD]/30 flex items-center justify-center text-[#E0E1DD] mb-6 group-hover:border-white group-hover:text-white transition-all duration-300">
                   {item.icon}
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-white mb-2">
+                <h3 className="font-heading text-xl font-semibold text-white mb-3">
                   {item.title}
                 </h3>
-                <p className="text-white/60 text-sm">{item.description}</p>
+                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
               </Card>
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link to="/register">
-              <Button className="btn-gold rounded-sm text-base px-8 py-6">
+              <Button className="bg-white text-[#0D1B2A] hover:bg-[#E0E1DD] rounded-none text-sm tracking-wider px-10 py-6 font-medium">
                 Get Involved Today
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
           </div>
@@ -345,24 +355,24 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-[#F9F7F1] paper-texture" data-testid="cta-section">
+      <section className="py-28 bg-[#FAFAF8] paper-texture" data-testid="cta-section">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#1A2A4A] mb-6">
+          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-6">
             Ready to Reconnect?
           </h2>
-          <p className="text-[#475569] text-lg mb-10">
+          <p className="text-[#415A77] text-lg mb-12 max-w-xl mx-auto">
             Join thousands of Eldenites who are already part of this growing community. 
             Register today and receive your official EHSAS membership.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register" data-testid="cta-register-btn">
-              <Button className="btn-primary rounded-sm text-base px-8 py-6">
+              <Button className="bg-[#0D1B2A] text-white hover:bg-[#1B263B] rounded-none text-sm tracking-wider px-10 py-6 font-medium shadow-xl">
                 Register Now
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
             <Link to="/directory" data-testid="cta-directory-btn">
-              <Button className="btn-secondary rounded-sm text-base px-8 py-6">
+              <Button className="bg-transparent border border-[#0D1B2A] text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white rounded-none text-sm tracking-wider px-10 py-6 font-medium">
                 Browse Directory
               </Button>
             </Link>
