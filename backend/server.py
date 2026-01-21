@@ -1,8 +1,9 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, status
+from fastapi import FastAPI, APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
@@ -15,14 +16,23 @@ import bcrypt
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import anyio
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# Firebase connection
+firebase_credentials = os.environ.get('FIREBASE_CREDENTIALS')
+if not firebase_admin._apps:
+    if firebase_credentials:
+        cred = credentials.Certificate(firebase_credentials)
+    else:
+        cred = credentials.ApplicationDefault()
+    firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 
 # JWT Settings
 JWT_SECRET = os.environ.get('JWT_SECRET', 'ehsas-super-secret-key-2024')
@@ -196,6 +206,47 @@ def generate_ehsas_id(year_of_leaving: int, count: int) -> str:
     year_suffix = str(year_of_leaving)[-2:]
     return f"EH{year_suffix}{str(count).zfill(4)}"
 
+async def run_sync(func, *args, **kwargs):
+    return await anyio.to_thread.run_sync(lambda: func(*args, **kwargs))
+
+def _get_document_by_field(collection_name: str, field: str, value):
+    query = db.collection(collection_name).where(field, "==", value).limit(1).stream()
+    for doc in query:
+        return doc.to_dict()
+    return None
+
+def _get_document_by_id(collection_name: str, doc_id: str):
+    doc = db.collection(collection_name).document(doc_id).get()
+    return doc.to_dict() if doc.exists else None
+
+def _set_document(collection_name: str, doc_id: str, data: dict):
+    db.collection(collection_name).document(doc_id).set(data)
+
+def _update_document(collection_name: str, doc_id: str, data: dict) -> bool:
+    doc_ref = db.collection(collection_name).document(doc_id)
+    if not doc_ref.get().exists:
+        return False
+    doc_ref.update(data)
+    return True
+
+def _delete_document(collection_name: str, doc_id: str) -> bool:
+    doc_ref = db.collection(collection_name).document(doc_id)
+    if not doc_ref.get().exists:
+        return False
+    doc_ref.delete()
+    return True
+
+def _query_collection(collection_name: str, filters=None, order_by=None, limit=None):
+    query = db.collection(collection_name)
+    if filters:
+        for field, operator, value in filters:
+            query = query.where(field, operator, value)
+    if order_by:
+        query = query.order_by(order_by[0], direction=order_by[1])
+    if limit:
+        query = query.limit(limit)
+    return [doc.to_dict() for doc in query.stream()]
+
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
@@ -327,7 +378,7 @@ def send_rejection_email(alumni_data: dict):
 
 @api_router.post("/auth/admin/login", response_model=AdminResponse)
 async def admin_login(login: AdminLogin):
-    admin = await db.admins.find_one({"email": login.email}, {"_id": 0})
+    admin = await run_sync(_get_document_by_field, "admins", "email", login.email)
     if not admin:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
@@ -350,7 +401,7 @@ async def admin_login(login: AdminLogin):
 @api_router.post("/alumni/register", status_code=201)
 async def register_alumni(data: AlumniRegistration):
     # Check if email already exists
-    existing = await db.alumni.find_one({"email": data.email}, {"_id": 0})
+    existing = await run_sync(_get_document_by_field, "alumni", "email", data.email)
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
     
@@ -358,7 +409,7 @@ async def register_alumni(data: AlumniRegistration):
     doc = alumni.model_dump()
     doc['created_at'] = doc['created_at'].isoformat()
     
-    await db.alumni.insert_one(doc)
+    await run_sync(_set_document, "alumni", alumni.id, doc)
     
     # Create notification for admin
     notification = Notification(
@@ -369,7 +420,7 @@ async def register_alumni(data: AlumniRegistration):
     )
     notif_doc = notification.model_dump()
     notif_doc['created_at'] = notif_doc['created_at'].isoformat()
-    await db.notifications.insert_one(notif_doc)
+    await run_sync(_set_document, "notifications", notification.id, notif_doc)
     
     # Send email notification to admin
     send_registration_notification(doc)
@@ -383,20 +434,20 @@ async def get_alumni(
     city: Optional[str] = None,
     status: Optional[str] = "approved"
 ):
-    query = {}
+    filters = []
     if batch:
-        query["year_of_leaving"] = batch
-    if profession:
-        query["profession"] = {"$regex": profession, "$options": "i"}
-    if city:
-        query["city"] = {"$regex": city, "$options": "i"}
+        filters.append(("year_of_leaving", "==", batch))
     if status:
-        query["status"] = status
-    
-    alumni_list = await db.alumni.find(query, {"_id": 0}).to_list(1000)
+        filters.append(("status", "==", status))
+
+    alumni_list = await run_sync(_query_collection, "alumni", filters, None, 1000)
     
     result = []
     for a in alumni_list:
+        if profession and profession.lower() not in a.get("profession", "").lower():
+            continue
+        if city and city.lower() not in a.get("city", "").lower():
+            continue
         a['created_at'] = a['created_at'] if isinstance(a['created_at'], str) else a['created_at'].isoformat()
         a['approved_at'] = a.get('approved_at', None)
         if a['approved_at'] and not isinstance(a['approved_at'], str):
@@ -407,7 +458,7 @@ async def get_alumni(
 
 @api_router.get("/alumni/pending", response_model=List[AlumniResponse])
 async def get_pending_alumni(admin: dict = Depends(get_current_admin)):
-    alumni_list = await db.alumni.find({"status": "pending"}, {"_id": 0}).to_list(1000)
+    alumni_list = await run_sync(_query_collection, "alumni", [("status", "==", "pending")], None, 1000)
     
     result = []
     for a in alumni_list:
@@ -419,7 +470,7 @@ async def get_pending_alumni(admin: dict = Depends(get_current_admin)):
 
 @api_router.get("/alumni/all", response_model=List[AlumniResponse])
 async def get_all_alumni(admin: dict = Depends(get_current_admin)):
-    alumni_list = await db.alumni.find({}, {"_id": 0}).to_list(1000)
+    alumni_list = await run_sync(_query_collection, "alumni", None, None, 1000)
     
     result = []
     for a in alumni_list:
@@ -433,25 +484,34 @@ async def get_all_alumni(admin: dict = Depends(get_current_admin)):
 
 @api_router.put("/alumni/{alumni_id}/approve")
 async def approve_alumni(alumni_id: str, admin: dict = Depends(get_current_admin)):
-    alumni = await db.alumni.find_one({"id": alumni_id}, {"_id": 0})
+    alumni = await run_sync(_get_document_by_id, "alumni", alumni_id)
     if not alumni:
         raise HTTPException(status_code=404, detail="Alumni not found")
     
     # Count approved alumni for this batch to generate EHSAS ID
-    count = await db.alumni.count_documents({
-        "year_of_leaving": alumni["year_of_leaving"],
-        "status": "approved"
-    })
+    approved_alumni = await run_sync(
+        _query_collection,
+        "alumni",
+        [
+            ("year_of_leaving", "==", alumni["year_of_leaving"]),
+            ("status", "==", "approved"),
+        ],
+    )
+    count = len(approved_alumni)
     ehsas_id = generate_ehsas_id(alumni["year_of_leaving"], count + 1)
     
-    await db.alumni.update_one(
-        {"id": alumni_id},
-        {"$set": {
+    updated = await run_sync(
+        _update_document,
+        "alumni",
+        alumni_id,
+        {
             "status": "approved",
             "ehsas_id": ehsas_id,
-            "approved_at": datetime.now(timezone.utc).isoformat()
-        }}
+            "approved_at": datetime.now(timezone.utc).isoformat(),
+        },
     )
+    if not updated:
+        raise HTTPException(status_code=404, detail="Alumni not found")
     
     # Send approval email with EHSAS ID
     email_sent = send_approval_email(alumni, ehsas_id)
@@ -464,14 +524,13 @@ async def approve_alumni(alumni_id: str, admin: dict = Depends(get_current_admin
 
 @api_router.put("/alumni/{alumni_id}/reject")
 async def reject_alumni(alumni_id: str, admin: dict = Depends(get_current_admin)):
-    alumni = await db.alumni.find_one({"id": alumni_id}, {"_id": 0})
+    alumni = await run_sync(_get_document_by_id, "alumni", alumni_id)
     if not alumni:
         raise HTTPException(status_code=404, detail="Alumni not found")
     
-    await db.alumni.update_one(
-        {"id": alumni_id},
-        {"$set": {"status": "rejected"}}
-    )
+    updated = await run_sync(_update_document, "alumni", alumni_id, {"status": "rejected"})
+    if not updated:
+        raise HTTPException(status_code=404, detail="Alumni not found")
     
     # Send rejection email
     send_rejection_email(alumni)
@@ -484,32 +543,28 @@ async def reject_alumni(alumni_id: str, admin: dict = Depends(get_current_admin)
 
 @api_router.get("/events", response_model=List[Event])
 async def get_events(active_only: bool = True):
-    query = {"is_active": True} if active_only else {}
-    events = await db.events.find(query, {"_id": 0}).to_list(100)
-    return events
+    filters = [("is_active", "==", True)] if active_only else None
+    return await run_sync(_query_collection, "events", filters, None, 100)
 
 @api_router.post("/events", response_model=Event)
 async def create_event(data: EventCreate, admin: dict = Depends(get_current_admin)):
     event = Event(**data.model_dump())
     doc = event.model_dump()
     doc['created_at'] = doc['created_at'].isoformat()
-    await db.events.insert_one(doc)
+    await run_sync(_set_document, "events", event.id, doc)
     return event
 
 @api_router.put("/events/{event_id}")
 async def update_event(event_id: str, data: EventCreate, admin: dict = Depends(get_current_admin)):
-    result = await db.events.update_one(
-        {"id": event_id},
-        {"$set": data.model_dump()}
-    )
-    if result.matched_count == 0:
+    updated = await run_sync(_update_document, "events", event_id, data.model_dump())
+    if not updated:
         raise HTTPException(status_code=404, detail="Event not found")
     return {"message": "Event updated"}
 
 @api_router.delete("/events/{event_id}")
 async def delete_event(event_id: str, admin: dict = Depends(get_current_admin)):
-    result = await db.events.delete_one({"id": event_id})
-    if result.deleted_count == 0:
+    deleted = await run_sync(_delete_document, "events", event_id)
+    if not deleted:
         raise HTTPException(status_code=404, detail="Event not found")
     return {"message": "Event deleted"}
 
@@ -519,8 +574,7 @@ async def delete_event(event_id: str, admin: dict = Depends(get_current_admin)):
 
 @api_router.get("/spotlight", response_model=List[SpotlightAlumni])
 async def get_spotlight_alumni():
-    spotlight = await db.spotlight.find({"is_featured": True}, {"_id": 0}).to_list(20)
-    return spotlight
+    return await run_sync(_query_collection, "spotlight", [("is_featured", "==", True)], None, 20)
 
 class SpotlightCreate(BaseModel):
     name: str
@@ -534,23 +588,20 @@ class SpotlightCreate(BaseModel):
 async def create_spotlight(data: SpotlightCreate, admin: dict = Depends(get_current_admin)):
     spotlight = SpotlightAlumni(**data.model_dump())
     doc = spotlight.model_dump()
-    await db.spotlight.insert_one(doc)
+    await run_sync(_set_document, "spotlight", spotlight.id, doc)
     return spotlight
 
 @api_router.put("/spotlight/{spotlight_id}")
 async def update_spotlight(spotlight_id: str, data: SpotlightCreate, admin: dict = Depends(get_current_admin)):
-    result = await db.spotlight.update_one(
-        {"id": spotlight_id},
-        {"$set": data.model_dump()}
-    )
-    if result.matched_count == 0:
+    updated = await run_sync(_update_document, "spotlight", spotlight_id, data.model_dump())
+    if not updated:
         raise HTTPException(status_code=404, detail="Spotlight alumni not found")
     return {"message": "Spotlight alumni updated"}
 
 @api_router.delete("/spotlight/{spotlight_id}")
 async def delete_spotlight(spotlight_id: str, admin: dict = Depends(get_current_admin)):
-    result = await db.spotlight.delete_one({"id": spotlight_id})
-    if result.deleted_count == 0:
+    deleted = await run_sync(_delete_document, "spotlight", spotlight_id)
+    if not deleted:
         raise HTTPException(status_code=404, detail="Spotlight alumni not found")
     return {"message": "Spotlight alumni deleted"}
 
@@ -560,34 +611,45 @@ async def delete_spotlight(spotlight_id: str, admin: dict = Depends(get_current_
 
 @api_router.get("/admin/stats")
 async def get_admin_stats(admin: dict = Depends(get_current_admin)):
-    total_alumni = await db.alumni.count_documents({"status": "approved"})
-    pending_registrations = await db.alumni.count_documents({"status": "pending"})
-    total_events = await db.events.count_documents({"is_active": True})
-    
-    # Get batch distribution
-    pipeline = [
-        {"$match": {"status": "approved"}},
-        {"$group": {"_id": "$year_of_leaving", "count": {"$sum": 1}}},
-        {"$sort": {"_id": -1}},
-        {"$limit": 10}
-    ]
-    batch_distribution = await db.alumni.aggregate(pipeline).to_list(10)
+    approved_alumni = await run_sync(_query_collection, "alumni", [("status", "==", "approved")])
+    pending_alumni = await run_sync(_query_collection, "alumni", [("status", "==", "pending")])
+    active_events = await run_sync(_query_collection, "events", [("is_active", "==", True)])
+
+    total_alumni = len(approved_alumni)
+    pending_registrations = len(pending_alumni)
+    total_events = len(active_events)
+
+    batch_counts = {}
+    for alumni in approved_alumni:
+        batch = alumni.get("year_of_leaving")
+        if batch is None:
+            continue
+        batch_counts[batch] = batch_counts.get(batch, 0) + 1
+    batch_distribution = [
+        {"batch": batch, "count": count}
+        for batch, count in sorted(batch_counts.items(), reverse=True)
+    ][:10]
     
     return {
         "total_alumni": total_alumni,
         "pending_registrations": pending_registrations,
         "total_events": total_events,
-        "batch_distribution": [{"batch": b["_id"], "count": b["count"]} for b in batch_distribution]
+        "batch_distribution": batch_distribution
     }
 
 @api_router.get("/admin/notifications")
 async def get_notifications(admin: dict = Depends(get_current_admin)):
-    notifications = await db.notifications.find({}, {"_id": 0}).sort("created_at", -1).to_list(50)
-    return notifications
+    return await run_sync(
+        _query_collection,
+        "notifications",
+        None,
+        (u"created_at", firestore.Query.DESCENDING),
+        50,
+    )
 
 @api_router.put("/admin/notifications/{notif_id}/read")
 async def mark_notification_read(notif_id: str, admin: dict = Depends(get_current_admin)):
-    await db.notifications.update_one({"id": notif_id}, {"$set": {"is_read": True}})
+    await run_sync(_update_document, "notifications", notif_id, {"is_read": True})
     return {"message": "Notification marked as read"}
 
 # =============================================================================
@@ -598,7 +660,7 @@ async def mark_notification_read(notif_id: str, admin: dict = Depends(get_curren
 async def seed_admin():
     # Seed admin account only
     admin_email = "deweshkk@gmail.com"
-    existing_admin = await db.admins.find_one({"email": admin_email})
+    existing_admin = await run_sync(_get_document_by_field, "admins", "email", admin_email)
     if not existing_admin:
         admin_doc = {
             "id": str(uuid.uuid4()),
@@ -607,7 +669,7 @@ async def seed_admin():
             "role": "admin",
             "created_at": datetime.now(timezone.utc).isoformat()
         }
-        await db.admins.insert_one(admin_doc)
+        await run_sync(_set_document, "admins", admin_doc["id"], admin_doc)
         logger.info(f"Admin account seeded: {admin_email}")
 
 # =============================================================================
@@ -619,6 +681,20 @@ async def root():
     return {"message": "EHSAS API - Elden Heights School Alumni Society"}
 
 app.include_router(api_router)
+
+FRONTEND_BUILD_DIR = ROOT_DIR.parent / "frontend" / "build"
+if FRONTEND_BUILD_DIR.exists():
+    app.mount(
+        "/static",
+        StaticFiles(directory=FRONTEND_BUILD_DIR / "static"),
+        name="static",
+    )
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        if full_path.startswith("api"):
+            raise HTTPException(status_code=404, detail="Not found")
+        return FileResponse(FRONTEND_BUILD_DIR / "index.html")
 
 app.add_middleware(
     CORSMiddleware,
@@ -633,7 +709,3 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
