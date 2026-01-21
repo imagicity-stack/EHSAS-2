@@ -29,6 +29,14 @@ JWT_SECRET = os.environ.get('JWT_SECRET', 'ehsas-super-secret-key-2024')
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_HOURS = 24
 
+# SMTP Settings
+SMTP_HOST = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
+SMTP_PORT = int(os.environ.get('SMTP_PORT', 587))
+SMTP_USER = os.environ.get('SMTP_USER', '')
+SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD', '')
+SMTP_FROM_EMAIL = os.environ.get('SMTP_FROM_EMAIL', 'ehsas@eldenheights.org')
+SMTP_FROM_NAME = os.environ.get('SMTP_FROM_NAME', 'EHSAS - Elden Heights School Alumni Society')
+
 # Security
 security = HTTPBearer()
 
