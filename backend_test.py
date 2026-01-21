@@ -387,6 +387,10 @@ class EHSASAPITester:
             self.test_admin_pending_alumni()
             self.test_admin_approve_alumni()
             self.test_admin_notifications()
+            
+            # Test CRUD operations for dynamic content
+            self.test_spotlight_crud()
+            self.test_events_crud()
         
         # Print summary
         print("\n" + "=" * 50)
