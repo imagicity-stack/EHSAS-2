@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-01-21T13:50:01.374022",
+  "total_tests": 10,
+  "passed_tests": 10,
+  "success_rate": "100.0%",
+  "results": [
+    {
+      "test": "API Health Check",
+      "status": "PASSED",
+      "details": "Status: 200, Response: {'message': 'EHSAS API - Elden Heights School Alumni Society'}"
+    },
+    {
+      "test": "Get Spotlight Alumni",
+      "status": "PASSED",
+      "details": "Found 5 spotlight alumni"
+    },
+    {
+      "test": "Get Events",
+      "status": "PASSED",
+      "details": "Found 3 events"
+    },
+    {
+      "test": "Get Alumni Directory",
+      "status": "PASSED",
+      "details": "Found 0 approved alumni"
+    },
+    {
+      "test": "Alumni Registration",
+      "status": "PASSED",
+      "details": "Alumni registered with ID: ecb1f026-b2b6-4a55-b7ff-5c9dab4bcc66"
+    },
+    {
+      "test": "Admin Login",
+      "status": "PASSED",
+      "details": "Token received: True"
+    },
+    {
+      "test": "Admin Stats",
+      "status": "PASSED",
+      "details": "Stats: 0 alumni, 1 pending"
+    },
+    {
+      "test": "Admin Pending Alumni",
+      "status": "PASSED",
+      "details": "Found 1 pending alumni"
+    },
+    {
+      "test": "Admin Approve Alumni",
+      "status": "PASSED",
+      "details": "Alumni approved with EHSAS ID: EHSAS-2022-0001"
+    },
+    {
+      "test": "Admin Notifications",
+      "status": "PASSED",
+      "details": "Found 1 notifications"
+    }
+  ]
+}
