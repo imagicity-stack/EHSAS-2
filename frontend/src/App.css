@@ -1,5 +1,5 @@
 /* EHSAS - Elden Heights School Alumni Society */
-/* Heritage Ivy League Style */
+/* Premium Elite Design */
 
 /* Hero Section */
 .hero-section {
@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(26, 42, 74, 0.75), rgba(26, 42, 74, 0.85));
+    background: linear-gradient(to bottom, rgba(13, 27, 42, 0.82), rgba(13, 27, 42, 0.92));
     z-index: 1;
 }
 
@@ -28,12 +28,13 @@
     padding: 2rem;
 }
 
-/* Navigation */
+/* Navigation - Premium */
 .nav-link {
     position: relative;
     color: var(--navy);
     font-weight: 500;
     padding: 0.5rem 0;
+    letter-spacing: 0.02em;
 }
 
 .nav-link::after {
@@ -42,22 +43,22 @@
     bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--gold);
-    transition: width 0.3s ease;
+    height: 1.5px;
+    background: var(--navy);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover::after {
     width: 100%;
 }
 
-/* Spotlight Cards */
+/* Spotlight Cards - Premium */
 .spotlight-card {
     position: relative;
     overflow: hidden;
     background: white;
-    border: 1px solid rgba(26, 42, 74, 0.1);
-    transition: all 0.4s ease;
+    border: 1px solid rgba(13, 27, 42, 0.06);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spotlight-card::before {
@@ -66,10 +67,10 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--gold);
+    height: 3px;
+    background: var(--navy);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .spotlight-card:hover::before {
@@ -77,20 +78,20 @@
 }
 
 .spotlight-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -15px rgba(26, 42, 74, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px -15px rgba(13, 27, 42, 0.15);
 }
 
-/* Event Cards */
+/* Event Cards - Premium */
 .event-card {
     background: white;
-    border: 1px solid rgba(26, 42, 74, 0.1);
+    border: 1px solid rgba(13, 27, 42, 0.06);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .event-card:hover {
-    box-shadow: 0 15px 35px -10px rgba(26, 42, 74, 0.15);
+    box-shadow: 0 20px 40px -12px rgba(13, 27, 42, 0.12);
 }
 
 .event-card-image {
@@ -99,143 +100,161 @@
 }
 
 .event-card-image img {
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .event-card:hover .event-card-image img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
-/* Alumni Directory Cards */
+/* Alumni Directory Cards - Premium */
 .alumni-card {
     background: white;
-    border: 1px solid rgba(26, 42, 74, 0.1);
-    border-left: 4px solid var(--navy);
+    border: 1px solid rgba(13, 27, 42, 0.06);
+    border-left: 3px solid var(--navy);
     padding: 1.5rem;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .alumni-card:hover {
-    border-left-color: var(--gold);
-    box-shadow: 0 10px 30px -10px rgba(26, 42, 74, 0.15);
+    border-left-color: var(--cardinal);
+    box-shadow: 0 15px 35px -10px rgba(13, 27, 42, 0.1);
+    transform: translateY(-2px);
 }
 
-/* Badge styles */
-.badge-gold {
-    background: var(--gold);
-    color: var(--navy);
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-}
-
+/* Badge styles - Elegant */
 .badge-navy {
     background: var(--navy);
     color: white;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
     font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.badge-slate {
+    background: var(--slate);
+    color: white;
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
 }
 
 .badge-cardinal {
     background: var(--cardinal);
     color: white;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
     font-weight: 600;
+    letter-spacing: 0.08em;
 }
 
-/* Footer */
+.badge-silver {
+    background: var(--silver);
+    color: var(--navy);
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+/* Footer - Premium */
 .footer-section {
     background: var(--navy);
     color: white;
 }
 
 .footer-heading {
-    color: var(--gold);
+    color: var(--silver);
     font-family: 'Playfair Display', serif;
     font-weight: 600;
     margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
 }
 
 .footer-link {
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.2s ease;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-    color: var(--gold);
+    color: white;
 }
 
-/* Form styles */
+/* Form styles - Premium */
 .form-section {
     background: white;
-    border: 1px solid rgba(26, 42, 74, 0.1);
-    border-top: 4px solid var(--gold);
+    border: 1px solid rgba(13, 27, 42, 0.08);
+    box-shadow: 0 8px 30px -8px rgba(13, 27, 42, 0.08);
 }
 
 .form-label {
     color: var(--navy);
     font-weight: 500;
     margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
 }
 
-/* Admin Panel */
+/* Admin Panel - Premium */
 .admin-sidebar {
     background: var(--navy);
     min-height: 100vh;
 }
 
 .admin-nav-item {
-    color: rgba(255, 255, 255, 0.7);
-    padding: 0.75rem 1.5rem;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 0.875rem 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    transition: all 0.2s ease;
+    gap: 0.875rem;
+    transition: all 0.3s ease;
     border-left: 3px solid transparent;
+    font-size: 0.9rem;
 }
 
 .admin-nav-item:hover,
 .admin-nav-item.active {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
-    border-left-color: var(--gold);
+    border-left-color: var(--silver);
 }
 
-/* Stats Cards */
+/* Stats Cards - Premium */
 .stat-card {
     background: white;
-    border: 1px solid rgba(26, 42, 74, 0.1);
-    padding: 1.5rem;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(13, 27, 42, 0.06);
+    padding: 1.75rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-card:hover {
-    box-shadow: 0 10px 30px -10px rgba(26, 42, 74, 0.15);
+    box-shadow: 0 15px 35px -10px rgba(13, 27, 42, 0.1);
 }
 
 .stat-number {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 700;
     color: var(--navy);
+    line-height: 1;
 }
 
 .stat-label {
-    color: var(--navy);
-    opacity: 0.7;
+    color: var(--slate);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .hero-section {
-        min-height: 80vh;
+        min-height: 85vh;
     }
     
     .stat-number {
@@ -245,12 +264,51 @@
 
 /* Selection color */
 ::selection {
-    background: var(--gold);
-    color: var(--navy);
+    background: var(--navy);
+    color: white;
 }
 
-/* Focus states */
+/* Focus states - Elegant */
 *:focus-visible {
     outline: 2px solid var(--navy);
-    outline-offset: 2px;
+    outline-offset: 3px;
+}
+
+/* Premium line decoration */
+.line-decoration {
+    position: relative;
+}
+
+.line-decoration::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -60px;
+    width: 40px;
+    height: 1px;
+    background: var(--navy);
+}
+
+/* Elegant hover underline */
+.hover-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }

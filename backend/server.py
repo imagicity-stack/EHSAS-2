@@ -180,7 +180,10 @@ async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(
     return payload
 
 def generate_ehsas_id(year_of_leaving: int, count: int) -> str:
-    return f"EHSAS-{year_of_leaving}-{str(count).zfill(4)}"
+    # Format: EH<Last 2 digits of YearOfLeaving><4 digit incremental counter>
+    # Example: EH190042
+    year_suffix = str(year_of_leaving)[-2:]
+    return f"EH{year_suffix}{str(count).zfill(4)}"
 
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
