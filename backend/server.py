@@ -388,11 +388,37 @@ async def get_spotlight_alumni():
     spotlight = await db.spotlight.find({"is_featured": True}, {"_id": 0}).to_list(20)
     return spotlight
 
+class SpotlightCreate(BaseModel):
+    name: str
+    batch: str
+    profession: str
+    achievement: str
+    category: str
+    image_url: Optional[str] = ""
+
 @api_router.post("/spotlight", response_model=SpotlightAlumni)
-async def create_spotlight(data: SpotlightAlumni, admin: dict = Depends(get_current_admin)):
-    doc = data.model_dump()
+async def create_spotlight(data: SpotlightCreate, admin: dict = Depends(get_current_admin)):
+    spotlight = SpotlightAlumni(**data.model_dump())
+    doc = spotlight.model_dump()
     await db.spotlight.insert_one(doc)
-    return data
+    return spotlight
+
+@api_router.put("/spotlight/{spotlight_id}")
+async def update_spotlight(spotlight_id: str, data: SpotlightCreate, admin: dict = Depends(get_current_admin)):
+    result = await db.spotlight.update_one(
+        {"id": spotlight_id},
+        {"$set": data.model_dump()}
+    )
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Spotlight alumni not found")
+    return {"message": "Spotlight alumni updated"}
+
+@api_router.delete("/spotlight/{spotlight_id}")
+async def delete_spotlight(spotlight_id: str, admin: dict = Depends(get_current_admin)):
+    result = await db.spotlight.delete_one({"id": spotlight_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Spotlight alumni not found")
+    return {"message": "Spotlight alumni deleted"}
 
 # =============================================================================
 # ADMIN ROUTES
@@ -436,7 +462,7 @@ async def mark_notification_read(notif_id: str, admin: dict = Depends(get_curren
 
 @app.on_event("startup")
 async def seed_admin():
-    # Seed admin account
+    # Seed admin account only
     admin_email = "deweshkk@gmail.com"
     existing_admin = await db.admins.find_one({"email": admin_email})
     if not existing_admin:
@@ -449,93 +475,6 @@ async def seed_admin():
         }
         await db.admins.insert_one(admin_doc)
         logger.info(f"Admin account seeded: {admin_email}")
-    
-    # Seed spotlight alumni
-    spotlight_count = await db.spotlight.count_documents({})
-    if spotlight_count == 0:
-        spotlight_data = [
-            SpotlightAlumni(
-                name="Dr. Ananya Sharma",
-                batch="2005",
-                profession="Cardiologist",
-                achievement="Leading cardiac surgeon at AIIMS Delhi",
-                category="doctor",
-                image_url="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?w=400"
-            ),
-            SpotlightAlumni(
-                name="Vikram Mehta",
-                batch="2008",
-                profession="Entrepreneur",
-                achievement="Founded TechVista - valued at $100M",
-                category="founder",
-                image_url="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=400"
-            ),
-            SpotlightAlumni(
-                name="Priya Gupta, IAS",
-                batch="2003",
-                profession="Civil Servant",
-                achievement="District Collector, Rajasthan",
-                category="civil_servant",
-                image_url="https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?w=400"
-            ),
-            SpotlightAlumni(
-                name="Rahul Verma",
-                batch="2010",
-                profession="Content Creator",
-                achievement="10M+ YouTube subscribers",
-                category="creator",
-                image_url="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?w=400"
-            ),
-            SpotlightAlumni(
-                name="Neha Kapoor",
-                batch="2006",
-                profession="Corporate Leader",
-                achievement="VP at Google India",
-                category="corporate",
-                image_url="https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?w=400"
-            ),
-        ]
-        for s in spotlight_data:
-            await db.spotlight.insert_one(s.model_dump())
-        logger.info("Spotlight alumni seeded")
-    
-    # Seed events
-    events_count = await db.events.count_documents({})
-    if events_count == 0:
-        events_data = [
-            Event(
-                title="Annual Alumni Reunion 2025",
-                description="Join us for the grand annual reunion at the school campus. Reconnect with old friends and make new memories.",
-                event_type="reunion",
-                date="2025-03-15",
-                time="10:00 AM",
-                location="Elden Heights School Campus",
-                image_url="https://images.pexels.com/photos/6759183/pexels-photo-6759183.jpeg?w=600"
-            ),
-            Event(
-                title="Career Guidance Webinar",
-                description="Industry leaders from our alumni network share insights on navigating career paths in 2025.",
-                event_type="webinar",
-                date="2025-02-20",
-                time="6:00 PM",
-                location="Online - Zoom",
-                image_url="https://images.pexels.com/photos/8199562/pexels-photo-8199562.jpeg?w=600"
-            ),
-            Event(
-                title="Founders Meetup - Delhi",
-                description="Exclusive meetup for alumni entrepreneurs. Network, share stories, and explore collaborations.",
-                event_type="meetup",
-                date="2025-04-10",
-                time="5:00 PM",
-                location="The Oberoi, New Delhi",
-                image_url="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?w=600"
-            ),
-        ]
-        for e in events_data:
-            doc = e.model_dump()
-            doc['created_at'] = doc['created_at'].isoformat()
-            await db.events.insert_one(doc)
-        logger.info("Events seeded")
 
 # =============================================================================
 # MAIN APP CONFIG
