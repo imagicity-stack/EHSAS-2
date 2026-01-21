@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-21T14:13:11.770045",
+  "timestamp": "2026-01-21T14:34:54.064298",
   "total_tests": 10,
   "passed_tests": 10,
   "success_rate": "100.0%",
@@ -12,22 +12,22 @@
     {
       "test": "Get Spotlight Alumni",
       "status": "PASSED",
-      "details": "Found 5 spotlight alumni"
+      "details": "Found 0 spotlight alumni"
     },
     {
       "test": "Get Events",
       "status": "PASSED",
-      "details": "Found 3 events"
+      "details": "Found 0 events"
     },
     {
       "test": "Get Alumni Directory",
       "status": "PASSED",
-      "details": "Found 2 approved alumni"
+      "details": "Found 3 approved alumni"
     },
     {
       "test": "Alumni Registration",
       "status": "PASSED",
-      "details": "Alumni registered with ID: e84c0573-e8e2-40e6-a8a1-0139188dd63d"
+      "details": "Alumni registered with ID: b6cab6c6-16b2-4166-b03c-920e44c7ba2f"
     },
     {
       "test": "Admin Login",
@@ -37,7 +37,7 @@
     {
       "test": "Admin Stats",
       "status": "PASSED",
-      "details": "Stats: 2 alumni, 2 pending"
+      "details": "Stats: 3 alumni, 2 pending"
     },
     {
       "test": "Admin Pending Alumni",
@@ -47,12 +47,12 @@
     {
       "test": "Admin Approve Alumni",
       "status": "PASSED",
-      "details": "Alumni approved with EHSAS ID: EH250001"
+      "details": "Alumni approved with EHSAS ID: EH220002"
     },
     {
       "test": "Admin Notifications",
       "status": "PASSED",
-      "details": "Found 4 notifications"
+      "details": "Found 5 notifications"
     }
   ]
 }
