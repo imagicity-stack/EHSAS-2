@@ -1,0 +1,290 @@
+/* EHSAS - Elden Heights School Alumni Society */
+/* Premium Design - Cardinal, Cream, Gold */
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(107, 15, 42, 0.85), rgba(45, 45, 45, 0.9));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Navigation - Premium */
+.nav-link {
+    position: relative;
+    color: var(--charcoal);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    letter-spacing: 0.02em;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--cardinal);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Spotlight Cards - Premium */
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cardinal);
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spotlight-card:hover::before {
+    transform: scaleX(1);
+}
+
+.spotlight-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px -15px rgba(139, 28, 58, 0.15);
+}
+
+/* Event Cards - Premium */
+.event-card {
+    background: white;
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.event-card:hover {
+    box-shadow: 0 20px 40px -12px rgba(139, 28, 58, 0.12);
+}
+
+.event-card-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card-image img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.event-card:hover .event-card-image img {
+    transform: scale(1.08);
+}
+
+/* Alumni Directory Cards - Premium */
+.alumni-card {
+    background: white;
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    border-left: 3px solid var(--cardinal);
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.alumni-card:hover {
+    border-left-color: var(--gold);
+    box-shadow: 0 15px 35px -10px rgba(139, 28, 58, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Badge styles - Elegant */
+.badge-cardinal {
+    background: var(--cardinal);
+    color: white;
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.badge-gold {
+    background: var(--gold);
+    color: var(--charcoal);
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.badge-cream {
+    background: var(--cream);
+    color: var(--cardinal);
+    padding: 0.25rem 0.875rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+/* Footer - Premium */
+.footer-section {
+    background: var(--cardinal-dark);
+    color: white;
+}
+
+.footer-heading {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--gold);
+}
+
+/* Form styles - Premium */
+.form-section {
+    background: white;
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    box-shadow: 0 8px 30px -8px rgba(139, 28, 58, 0.08);
+}
+
+.form-label {
+    color: var(--charcoal);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+}
+
+/* Admin Panel - Premium */
+.admin-sidebar {
+    background: var(--cardinal-dark);
+    min-height: 100vh;
+}
+
+.admin-nav-item {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.875rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-size: 0.9rem;
+}
+
+.admin-nav-item:hover,
+.admin-nav-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-left-color: var(--gold);
+}
+
+/* Stats Cards - Premium */
+.stat-card {
+    background: white;
+    border: 1px solid rgba(139, 28, 58, 0.08);
+    padding: 1.75rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+    box-shadow: 0 15px 35px -10px rgba(139, 28, 58, 0.1);
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--cardinal);
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--charcoal-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 85vh;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+/* Selection color */
+::selection {
+    background: var(--cardinal);
+    color: white;
+}
+
+/* Focus states - Elegant */
+*:focus-visible {
+    outline: 2px solid var(--cardinal);
+    outline-offset: 3px;
+}
+
+/* Elegant hover underline */
+.hover-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
